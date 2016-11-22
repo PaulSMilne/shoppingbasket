@@ -4,12 +4,12 @@ public class Purchase{
 
      String name;
      double price;
-     boolean bogoffState;
+     boolean bogofState;
 
      public Purchase(String name, double price){
           this.name = name;
           this.price = price;
-          this.bogoffState = false;
+          this.bogofState = false;
      }
 
      public String getName(){
@@ -20,15 +20,15 @@ public class Purchase{
           return this.price;
      }
 
-     public boolean getBogoffState(){
-          return this.bogoffState;
+     public boolean getBogofState(){
+          return this.bogofState;
      }
 
-     public void flipBogoffState(){
-          if(this.bogoffState == false){
-          this.bogoffState = true;
+     public void flipBogofState(){
+          if(this.bogofState == false){
+          this.bogofState = true;
           } else {
-               this.bogoffState = false;
+               this.bogofState = false;
           }
      }
 

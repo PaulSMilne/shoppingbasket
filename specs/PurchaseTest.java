@@ -23,19 +23,17 @@ public  class PurchaseTest{
      }
 
      @Test
-     public void canGetBogoffState(){
-          boolean state = purchase.getBogoffState();
+     public void canGetBogofState(){
+          boolean state = purchase.getBogofState();
           assertEquals(false, state);
      }
 
      @Test
-     public void canFlipBogoffState(){
-          purchase.flipBogoffState();
-          //boolean state = purchase.getBogoffState();
-          //assertEquals(true, state);
-     purchase.flipBogoffState();
-     boolean state = purchase.getBogoffState();
-     assertEquals(false, state);
+     public void canFlipBogofState(){
+          purchase.flipBogofState();
+          purchase.flipBogofState();
+          boolean state = purchase.getBogofState();
+          assertEquals(false, state);
      }
 
 

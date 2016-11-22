@@ -45,32 +45,32 @@ public class ShoppingBasket{
           return subTotal;
      }
 
-     public double bogoffDiscount(){
+     public double bogofDiscount(){
           ArrayList<Purchase> purchases = getPurchases();
 
-         //create an empty List for the prices of the bogoff items
-          ArrayList<Double> bogoffPrices = new ArrayList<Double>();
+         //create an empty List for the prices of the bogof items
+          ArrayList<Double> bogofPrices = new ArrayList<Double>();
 
           for (Purchase item : purchases){
-               boolean state = item.getBogoffState();
+               boolean state = item.getBogofState();
                if (state == true) {
                     double price = item.getPrice();
-                    bogoffPrices.add(price);
+                    bogofPrices.add(price);
                }
           }
 
           //checks if there is more than one item in the list
-          if (bogoffPrices.size() >= 2) {
+          if (bogofPrices.size() >= 2) {
                
                //gets size of price list and half that to get the number of items to discount
-               int bogoffPriceListSize = bogoffPrices.size();
-               int bogoffPriceListExtent = bogoffPriceListSize / 2;
+               int bogofPriceListSize = bogofPrices.size();
+               int bogofPriceListExtent = bogofPriceListSize / 2;
 
                //the price list is sorted with lowest price first
-               Collections.sort(bogoffPrices);
+               Collections.sort(bogofPrices);
 
                //Creates a sublist of lowest half of prices to add together for the total discount. Will work for both odd and even numbers of prices.
-               List<Double> freebies = bogoffPrices.subList(0, bogoffPriceListExtent);
+               List<Double> freebies = bogofPrices.subList(0, bogofPriceListExtent);
 
                double discount = 0.00;
 
@@ -86,8 +86,8 @@ public class ShoppingBasket{
      public double getTotal(){ //applies 2% loyalty discount
           double subTotal = getSubTotal();
 
-          double bogoffDiscount = bogoffDiscount();
-          subTotal -= bogoffDiscount;
+          double bogofDiscount = bogofDiscount();
+          subTotal -= bogofDiscount;
 
           if (subTotal > 20.00) {
                double tenPerCentDiscount = subTotal*0.10;

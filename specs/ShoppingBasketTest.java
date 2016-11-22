@@ -93,30 +93,30 @@ public  class ShoppingBasketTest{
     }
 
     @Test
-    public void canGetBogoffDiscount(){
+    public void canGetBogofDiscount(){
       ArrayList<Purchase> purchases = shoppingbasket.getPurchases();
 
       Purchase purchase4 = new Purchase("Mini Widget", 5.99);
       Purchase purchase5 = new Purchase("Micro Widget", 1.99);
 
-      purchase1.flipBogoffState();
-      purchase2.flipBogoffState();
-      purchase3.flipBogoffState();
-      purchase4.flipBogoffState();
+      purchase1.flipBogofState();
+      purchase2.flipBogofState();
+      purchase3.flipBogofState();
+      purchase4.flipBogofState();
       shoppingbasket.addPurchase(purchase1);
       shoppingbasket.addPurchase(purchase2);
       shoppingbasket.addPurchase(purchase3);
       shoppingbasket.addPurchase(purchase4);
       shoppingbasket.addPurchase(purchase5);
-      double subTotal = shoppingbasket.bogoffDiscount();
+      double subTotal = shoppingbasket.bogofDiscount();
       assertEquals(20.98, subTotal, 0);
     }
 
     @Test
     public void canGetGrandTotalwithAllDiscounts(){
       ArrayList<Purchase> purchases = shoppingbasket.getPurchases();
-      purchase1.flipBogoffState();
-      purchase2.flipBogoffState();
+      purchase1.flipBogofState();
+      purchase2.flipBogofState();
       customer.flipLoyaltyState();
       shoppingbasket.addPurchase(purchase1);
       shoppingbasket.addPurchase(purchase2);
@@ -137,7 +137,7 @@ public  class ShoppingBasketTest{
 
     @Test
     public void oneItemTotal(){
-      purchase1.flipBogoffState();
+      purchase1.flipBogofState();
       shoppingbasket.addPurchase(purchase1);
       double total = shoppingbasket.getTotal();
       assertEquals(14.99, total, 0);
@@ -146,9 +146,9 @@ public  class ShoppingBasketTest{
       assertEquals(14.69, total, 0);
     }
   @Test
-  public void twoItemBogoffTotal(){
-    purchase1.flipBogoffState();
-    purchase2.flipBogoffState();
+  public void twoItemBogofTotal(){
+    purchase1.flipBogofState();
+    purchase2.flipBogofState();
     shoppingbasket.addPurchase(purchase1);
     shoppingbasket.addPurchase(purchase2);
     double total = shoppingbasket.getTotal();
@@ -156,10 +156,10 @@ public  class ShoppingBasketTest{
   }
   
   @Test
-  public void twoItemsOneBogoffTotal(){
+  public void twoItemsOneBogofTotal(){
     Purchase purchase1 = new Purchase("Mini Widget", 5.99);
     Purchase purchase2 = new Purchase("Micro Widget", 1.99);
-    purchase2.flipBogoffState();
+    purchase2.flipBogofState();
     shoppingbasket.addPurchase(purchase1);
     shoppingbasket.addPurchase(purchase2);
     double total = shoppingbasket.getTotal();
