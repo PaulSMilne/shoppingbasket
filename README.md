@@ -1,4 +1,6 @@
-An interesting challenge that let me work out how to navigate through a complicated method that uses for loops and if statements - the bogoffDiscount method in the ShoppingBasket class.
+An interesting challenge that let me work out how to navigate through a complicated method that uses for loops and if statements - the bogofDiscount method in the ShoppingBasket class.
+
+I made an assumption that any group of BOGOF items in the shop can be grouped together for a discount. I could have made an assumption that only matching kinds of items are eligible for this discount, but I thought this would only add another if statement to check if two items were the same, and I'm not convinced it would have added enough to my learning to justify the extra work.
 
 I learned a couple of interesting methods I wasn't aware of before:
 
