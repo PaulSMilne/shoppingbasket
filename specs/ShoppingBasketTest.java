@@ -66,7 +66,6 @@ public  class ShoppingBasketTest{
       purchases.add(purchase3);
       double total = shoppingbasket.getTotal();
       assertEquals(140.97, total, 0.0000);
-
     }
 
      @Test
@@ -80,5 +79,36 @@ public  class ShoppingBasketTest{
       assertEquals(138.15, total, 0.00);
     }
 
+    @Test
+    public void canGetBogoffDiscount(){
+      ArrayList<Purchase> purchases = shoppingbasket.getPurchases();
 
+      Purchase purchase4 = new Purchase("Mini Widget", 5.99);
+      Purchase purchase5 = new Purchase("Micro Widget", 1.99);
+
+      purchase1.flipBogoffState();
+      purchase2.flipBogoffState();
+      purchase3.flipBogoffState();
+      purchase4.flipBogoffState();
+      purchases.add(purchase1);
+      purchases.add(purchase2);
+      purchases.add(purchase3);
+      purchases.add(purchase4);
+      purchases.add(purchase5);
+      double subTotal = shoppingbasket.bogoffDiscount();
+      assertEquals(20.98, subTotal, 0);
+    }
+
+    @Test
+    public void canGetGrandTotalwithAllDiscounts(){
+      ArrayList<Purchase> purchases = shoppingbasket.getPurchases();
+      purchase1.flipBogoffState();
+      purchase2.flipBogoffState();
+      customer.flipLoyaltyState();
+      purchases.add(purchase1);
+      purchases.add(purchase2);
+      purchases.add(purchase3);
+      double total = shoppingbasket.getTotal();
+      assertEquals(123.46 ,total, 0);
+    }
 }

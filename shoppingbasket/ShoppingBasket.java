@@ -30,6 +30,8 @@ public class ShoppingBasket{
 
      public double getTotal(){ //applies 2% loyalty discount
           double subTotal = getSubTotal();
+          double bogoffDiscount = bogoffDiscount();
+          subTotal -= bogoffDiscount;
           boolean state = customer.getLoyaltyState();
           if (state == true) {
                double total = subTotal -= (subTotal * 0.02);
@@ -41,5 +43,33 @@ public class ShoppingBasket{
                double total = subTotal;
                return total;
           }
+     }
+
+     public double bogoffDiscount(){
+
+          ArrayList<Purchase> purchases = getPurchases();
+
+          ArrayList<Double> bogoffPrices = new ArrayList<Double>();
+
+          for (Purchase item : purchases){
+               boolean state = item.getBogoffState();
+               if (state == true) {
+                    double price = item.getPrice();
+                    bogoffPrices.add(price);
+               }
+          }
+          int bogoffPriceListSize = bogoffPrices.size();
+          int bogoffPriceListExtent = bogoffPriceListSize / 2;
+
+          Collections.sort(bogoffPrices);
+
+          List<Double> freebies = bogoffPrices.subList(0, bogoffPriceListExtent);
+
+          double discount = 0.00;
+
+          for (double price : freebies) {
+               discount += price;
+          }
+          return discount;
      }
 }
