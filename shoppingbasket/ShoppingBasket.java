@@ -25,12 +25,15 @@ public class ShoppingBasket{
      }
 
      public void removePurchase(Purchase purchase){
+
+          //create a new list with the item to remove
           ArrayList<Purchase> removal = new ArrayList<Purchase>();
           removal.add(purchase);
 
           ArrayList<Purchase> purchases = getPurchases();
 
-          purchases.removeAll(removal); //removeAll takes the common items in the two lists out of the purchases list.
+          //removeAll takes the common items in the two lists out of the purchases list.
+          purchases.removeAll(removal); 
      }
 
      public double getSubTotal(){
@@ -43,9 +46,9 @@ public class ShoppingBasket{
      }
 
      public double bogoffDiscount(){
-
           ArrayList<Purchase> purchases = getPurchases();
 
+          //create an empty List for the prices of the bogoff items
           ArrayList<Double> bogoffPrices = new ArrayList<Double>();
 
           for (Purchase item : purchases){
@@ -55,11 +58,15 @@ public class ShoppingBasket{
                     bogoffPrices.add(price);
                }
           }
+
+          //get size of price list and half that to get the number of items to discount
           int bogoffPriceListSize = bogoffPrices.size();
           int bogoffPriceListExtent = bogoffPriceListSize / 2;
 
+          //the price list is sorted with lowest price first
           Collections.sort(bogoffPrices);
 
+          //creates a sublist of lowest half of prices to add together for the total discount
           List<Double> freebies = bogoffPrices.subList(0, bogoffPriceListExtent);
 
           double discount = 0.00;
