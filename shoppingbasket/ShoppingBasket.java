@@ -19,6 +19,20 @@ public class ShoppingBasket{
           return this.purchases;
      }
 
+     public void addPurchase(Purchase purchase){
+          ArrayList<Purchase> purchases = getPurchases();
+          purchases.add(purchase);
+     }
+
+     public void removePurchase(Purchase purchase){
+          ArrayList<Purchase> removal = new ArrayList<Purchase>();
+          removal.add(purchase);
+
+          ArrayList<Purchase> purchases = getPurchases();
+
+          purchases.removeAll(removal); //removeAll takes the common items in the two lists out of the purchases list.
+     }
+
      public double getSubTotal(){
           double subTotal = 0.00;
           for (Purchase purchase : purchases){
@@ -26,23 +40,6 @@ public class ShoppingBasket{
                subTotal += price;
           }
           return subTotal;
-     }
-
-     public double getTotal(){ //applies 2% loyalty discount
-          double subTotal = getSubTotal();
-          double bogoffDiscount = bogoffDiscount();
-          subTotal -= bogoffDiscount;
-          boolean state = customer.getLoyaltyState();
-          if (state == true) {
-               double total = subTotal -= (subTotal * 0.02);
-               total = total*100; // code for rounding
-               total = Math.round(total);
-               total = total/100;
-               return total;
-          } else {
-               double total = subTotal;
-               return total;
-          }
      }
 
      public double bogoffDiscount(){
@@ -72,4 +69,32 @@ public class ShoppingBasket{
           }
           return discount;
      }
+
+     public double getTotal(){ //applies 2% loyalty discount
+          double subTotal = getSubTotal();
+
+          double bogoffDiscount = bogoffDiscount();
+          subTotal -= bogoffDiscount;
+
+          if (subTotal > 20.00) {
+               double tenPerCentDiscount = subTotal*0.10;
+               subTotal -= tenPerCentDiscount;
+               subTotal = subTotal*100; // code for rounding
+               subTotal = Math.round(subTotal);
+               subTotal = subTotal/100;
+          }
+
+          boolean state = customer.getLoyaltyState();
+          if (state == true) {
+               double total = subTotal -= (subTotal * 0.02);
+               total = total*100; // code for rounding
+               total = Math.round(total);
+               total = total/100;
+               return total;
+          } else {
+               double total = subTotal;
+               return total;
+          }
+     }
+
 }

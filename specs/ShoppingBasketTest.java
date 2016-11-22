@@ -41,19 +41,32 @@ public  class ShoppingBasketTest{
 
      @Test
      public void candAddPurchaseToPurchasesList(){
+          shoppingbasket.addPurchase(purchase1);
           ArrayList<Purchase> purchases = shoppingbasket.getPurchases();
-          purchases.add(purchase1);
           assertEquals(1, purchases.size());
-          purchases.add(purchase1);
+          shoppingbasket.addPurchase(purchase2);
+          purchases = shoppingbasket.getPurchases();
           assertEquals(2, purchases.size());
+    }
+
+    @Test
+    public void canRemovePurchaseFromPurchaseList(){
+        shoppingbasket.addPurchase(purchase1);
+        shoppingbasket.addPurchase(purchase2);
+        ArrayList<Purchase> purchases = shoppingbasket.getPurchases();
+        assertEquals(2, purchases.size());
+
+        shoppingbasket.removePurchase(purchase1);
+        purchases = shoppingbasket.getPurchases();
+        assertEquals(1, purchases.size());
     }
 
     @Test
     public void canGetPurchasesSubtotal(){
           ArrayList<Purchase> purchases = shoppingbasket.getPurchases();
-          purchases.add(purchase1);
-          purchases.add(purchase2);
-          purchases.add(purchase3);
+          shoppingbasket.addPurchase(purchase1);
+          shoppingbasket.addPurchase(purchase2);
+          shoppingbasket.addPurchase(purchase3);
           double subTotal = shoppingbasket.getSubTotal();
           assertEquals(140.97, subTotal, 0);
     }
@@ -61,22 +74,22 @@ public  class ShoppingBasketTest{
      @Test
      public void canGetTotal(){
       ArrayList<Purchase> purchases = shoppingbasket.getPurchases();
-      purchases.add(purchase1);
-      purchases.add(purchase2);
-      purchases.add(purchase3);
+      shoppingbasket.addPurchase(purchase1);
+      shoppingbasket.addPurchase(purchase2);
+      shoppingbasket.addPurchase(purchase3);
       double total = shoppingbasket.getTotal();
-      assertEquals(140.97, total, 0.0000);
+      assertEquals(126.87, total, 0.0000);
     }
 
      @Test
      public void canApplyCustomerLoyaltyDiscount(){
       ArrayList<Purchase> purchases = shoppingbasket.getPurchases();
-      purchases.add(purchase1);
-      purchases.add(purchase2);
-      purchases.add(purchase3);
+      shoppingbasket.addPurchase(purchase1);
+      shoppingbasket.addPurchase(purchase2);
+      shoppingbasket.addPurchase(purchase3);
       customer.flipLoyaltyState();
       double total = shoppingbasket.getTotal();
-      assertEquals(138.15, total, 0.00);
+      assertEquals(124.33, total, 0.00);
     }
 
     @Test
@@ -90,11 +103,11 @@ public  class ShoppingBasketTest{
       purchase2.flipBogoffState();
       purchase3.flipBogoffState();
       purchase4.flipBogoffState();
-      purchases.add(purchase1);
-      purchases.add(purchase2);
-      purchases.add(purchase3);
-      purchases.add(purchase4);
-      purchases.add(purchase5);
+      shoppingbasket.addPurchase(purchase1);
+      shoppingbasket.addPurchase(purchase2);
+      shoppingbasket.addPurchase(purchase3);
+      shoppingbasket.addPurchase(purchase4);
+      shoppingbasket.addPurchase(purchase5);
       double subTotal = shoppingbasket.bogoffDiscount();
       assertEquals(20.98, subTotal, 0);
     }
@@ -105,10 +118,20 @@ public  class ShoppingBasketTest{
       purchase1.flipBogoffState();
       purchase2.flipBogoffState();
       customer.flipLoyaltyState();
-      purchases.add(purchase1);
-      purchases.add(purchase2);
-      purchases.add(purchase3);
+      shoppingbasket.addPurchase(purchase1);
+      shoppingbasket.addPurchase(purchase2);
+      shoppingbasket.addPurchase(purchase3);
       double total = shoppingbasket.getTotal();
-      assertEquals(123.46 ,total, 0);
+      assertEquals(111.11 ,total, 0);
+    }
+
+    @Test
+    public void underTwentyTotal(){
+      Purchase purchase1 = new Purchase("Mini Widget", 5.99);
+      Purchase purchase2 = new Purchase("Micro Widget", 1.99);
+      shoppingbasket.addPurchase(purchase1);
+      shoppingbasket.addPurchase(purchase2);
+      double total = shoppingbasket.getTotal();
+      assertEquals(7.98, total, 0);
     }
 }
