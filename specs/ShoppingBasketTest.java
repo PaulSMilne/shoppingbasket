@@ -54,8 +54,8 @@ public  class ShoppingBasketTest{
           purchases.add(purchase1);
           purchases.add(purchase2);
           purchases.add(purchase3);
-          double subTotal = getSubtotal();
-          assertEquals(149.97, subTotal, 0);
+          double subTotal = shoppingbasket.getSubTotal();
+          assertEquals(140.97, subTotal, 0);
     }
 
 

@@ -20,6 +20,11 @@ public class ShoppingBasket{
      }
 
      public double getSubTotal(){
-          
+          double subTotal = 0.00;
+          for (Purchase purchase : purchases){
+               double price = purchase.getPrice();
+               subTotal += price;
+          }
+          return subTotal;
      }
 }
