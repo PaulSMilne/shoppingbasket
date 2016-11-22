@@ -154,6 +154,7 @@ public  class ShoppingBasketTest{
     double total = shoppingbasket.getTotal();
     assertEquals(23.39, total, 0);
   }
+  
   @Test
   public void twoItemsOneBogoffTotal(){
     Purchase purchase1 = new Purchase("Mini Widget", 5.99);
