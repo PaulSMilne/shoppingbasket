@@ -58,6 +58,15 @@ public  class ShoppingBasketTest{
           assertEquals(140.97, subTotal, 0);
     }
 
+     @Test
+     public void canApplyCustomerLoyaltyDiscount(){
+      ArrayList<Purchase> purchases = shoppingbasket.getPurchases();
+      purchases.add(purchase1);
+      purchases.add(purchase2);
+      purchases.add(purchase3);
+      double total = shoppingbasket.applyLoyaltyDiscount();
+      assertEquals(138.15, total, 0.0000);
+    }
 
 
 }

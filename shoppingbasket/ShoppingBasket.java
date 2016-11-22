@@ -27,4 +27,13 @@ public class ShoppingBasket{
           }
           return subTotal;
      }
+
+     public double applyLoyaltyDiscount(){ //applies 2% loyalty discount
+          double subTotal = getSubTotal();
+          double total = subTotal -= (subTotal * 0.02);
+          total = total*100; // code for rounding
+          total = Math.round(total);
+          total = total/100;
+          return total;
+     }
 }
