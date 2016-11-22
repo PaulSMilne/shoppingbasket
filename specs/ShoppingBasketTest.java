@@ -145,4 +145,23 @@ public  class ShoppingBasketTest{
       total = shoppingbasket.getTotal();
       assertEquals(14.69, total, 0);
     }
+  @Test
+  public void twoItemBogoffTotal(){
+    purchase1.flipBogoffState();
+    purchase2.flipBogoffState();
+    shoppingbasket.addPurchase(purchase1);
+    shoppingbasket.addPurchase(purchase2);
+    double total = shoppingbasket.getTotal();
+    assertEquals(23.39, total, 0);
+  }
+  @Test
+  public void twoItemsOneBogoffTotal(){
+    Purchase purchase1 = new Purchase("Mini Widget", 5.99);
+    Purchase purchase2 = new Purchase("Micro Widget", 1.99);
+    purchase2.flipBogoffState();
+    shoppingbasket.addPurchase(purchase1);
+    shoppingbasket.addPurchase(purchase2);
+    double total = shoppingbasket.getTotal();
+    assertEquals(7.98, total, 0);
+  }
 }

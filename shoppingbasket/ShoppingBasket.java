@@ -48,20 +48,20 @@ public class ShoppingBasket{
      public double bogoffDiscount(){
           ArrayList<Purchase> purchases = getPurchases();
 
-          //checks if there is more than one item in the list
-          if (purchases.size() >= 2) {
+         //create an empty List for the prices of the bogoff items
+          ArrayList<Double> bogoffPrices = new ArrayList<Double>();
 
-               //create an empty List for the prices of the bogoff items
-               ArrayList<Double> bogoffPrices = new ArrayList<Double>();
-
-               for (Purchase item : purchases){
-                    boolean state = item.getBogoffState();
-                    if (state == true) {
-                         double price = item.getPrice();
-                         bogoffPrices.add(price);
-                    }
+          for (Purchase item : purchases){
+               boolean state = item.getBogoffState();
+               if (state == true) {
+                    double price = item.getPrice();
+                    bogoffPrices.add(price);
                }
+          }
 
+          //checks if there is more than one item in the list
+          if (bogoffPrices.size() >= 2) {
+               
                //gets size of price list and half that to get the number of items to discount
                int bogoffPriceListSize = bogoffPrices.size();
                int bogoffPriceListExtent = bogoffPriceListSize / 2;
@@ -79,7 +79,7 @@ public class ShoppingBasket{
                }
                return discount;
           } else {
-               return 0.00;
+               return 0.00; //if there is only item there is no discount
           }
      }
 
