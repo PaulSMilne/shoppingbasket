@@ -1,31 +1,29 @@
 package shoppingbasket;
 
-/**
- * Created by user on 21/11/2016.
- */
-public class Customer {
+public class Customer{
 
-    private String name;
-    private boolean loyalty;
+     String name;
+     boolean loyaltyState;
 
-    public Customer(String name){
-        this.name = name;
-        this.loyalty = false;
-    }
+     public Customer(String name){
+          this.name = name;
+          this.loyaltyState = false;
+     }
 
-    public String getName(){
-        return this.name;
-    }
+     public String getName(){
+          return this.name;
+     }
 
-    public boolean getLoyalty(){
-        return this.loyalty;
-    }
+     public boolean getLoyaltyState(){
+          return this.loyaltyState;
+     }
 
-    public void flipLoyalty(){
-        boolean currentLoyalty = getLoyalty();
-        if (currentLoyalty == false){
-            this.loyalty = true;
-        }
-        this.loyalty = false;
-    }
+     public void flipLoyaltyState(){
+          if (this.loyaltyState == false){
+               this.loyaltyState = true;
+          } else {
+               this.loyaltyState = false;
+          }
+     }
+
 }

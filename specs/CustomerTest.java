@@ -1,38 +1,36 @@
-// import static org.junit.Assert.*;
-// import org.junit.*;
-// import java.util.*;
-// import shoppingbasket.*;
+import static org.junit.Assert.*;
+import org.junit.*;
+import shoppingbasket.*;
 
-// /**
-//  * Created by Paul Milne on 21/11/2016.
-//  */
-// public class CustomerTest {
+public  class CustomerTest{
+     Customer customer;
 
-//     Customer customer;
+     @Before
+     public void before(){
+          customer = new Customer("Zippy");
+     }
 
-//     @Before
-//     public void before(){
-//         Customer customer;
-//         customer = new Customer("Zippy");
-//     }
+     @Test
+     public void canGetName(){
+          String name = customer.getName();
+          assertEquals("Zippy", name);
+     }
 
-//     @Test
-//     public void getName(){
-//         String name = customer.getName();
-//         assertEquals("Zippy", name);
-//     }
+     @Test
+     public void canGetLoyaltyState(){
+          boolean state = customer.getLoyaltyState();
+          assertEquals(false, state);
+     }
 
-//     @Test
-//     public void getLoyalty(){
-//         boolean state = customer.getLoyalty();
-//         assertEquals(false, state);
-//     }
+     @Test
+     public void canFlipLoyaltyState(){
+          customer.flipLoyaltyState();
+          boolean state = customer.getLoyaltyState();
+          assertEquals(true, state);
+          customer.flipLoyaltyState();
+          state = customer.getLoyaltyState();
+          assertEquals(false, state);
+    }
 
-//     @Test
-//     public void flipLoyalty(){
-//         customer.flipLoyalty();
-//         boolean state = customer.getLoyalty();
-//         assertEquals(true, state);
-//     }
 
-// }
+}
