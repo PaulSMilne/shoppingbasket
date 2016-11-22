@@ -134,4 +134,15 @@ public  class ShoppingBasketTest{
       double total = shoppingbasket.getTotal();
       assertEquals(7.98, total, 0);
     }
+
+    @Test
+    public void oneItemTotal(){
+      purchase1.flipBogoffState();
+      shoppingbasket.addPurchase(purchase1);
+      double total = shoppingbasket.getTotal();
+      assertEquals(14.99, total, 0);
+      customer.flipLoyaltyState();
+      total = shoppingbasket.getTotal();
+      assertEquals(14.69, total, 0);
+    }
 }

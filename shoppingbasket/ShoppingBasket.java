@@ -32,7 +32,7 @@ public class ShoppingBasket{
 
           ArrayList<Purchase> purchases = getPurchases();
 
-          //removeAll takes the common items in the two lists out of the purchases list.
+          //take the common items in the two lists out of the purchases list
           purchases.removeAll(removal); 
      }
 
@@ -48,33 +48,39 @@ public class ShoppingBasket{
      public double bogoffDiscount(){
           ArrayList<Purchase> purchases = getPurchases();
 
-          //create an empty List for the prices of the bogoff items
-          ArrayList<Double> bogoffPrices = new ArrayList<Double>();
+          //checks if there is more than one item in the list
+          if (purchases.size() >= 2) {
 
-          for (Purchase item : purchases){
-               boolean state = item.getBogoffState();
-               if (state == true) {
-                    double price = item.getPrice();
-                    bogoffPrices.add(price);
+               //create an empty List for the prices of the bogoff items
+               ArrayList<Double> bogoffPrices = new ArrayList<Double>();
+
+               for (Purchase item : purchases){
+                    boolean state = item.getBogoffState();
+                    if (state == true) {
+                         double price = item.getPrice();
+                         bogoffPrices.add(price);
+                    }
                }
+
+               //gets size of price list and half that to get the number of items to discount
+               int bogoffPriceListSize = bogoffPrices.size();
+               int bogoffPriceListExtent = bogoffPriceListSize / 2;
+
+               //the price list is sorted with lowest price first
+               Collections.sort(bogoffPrices);
+
+               //Creates a sublist of lowest half of prices to add together for the total discount. Will work for both odd and even numbers of prices.
+               List<Double> freebies = bogoffPrices.subList(0, bogoffPriceListExtent);
+
+               double discount = 0.00;
+
+               for (double price : freebies) {
+                    discount += price;
+               }
+               return discount;
+          } else {
+               return 0.00;
           }
-
-          //get size of price list and half that to get the number of items to discount
-          int bogoffPriceListSize = bogoffPrices.size();
-          int bogoffPriceListExtent = bogoffPriceListSize / 2;
-
-          //the price list is sorted with lowest price first
-          Collections.sort(bogoffPrices);
-
-          //creates a sublist of lowest half of prices to add together for the total discount
-          List<Double> freebies = bogoffPrices.subList(0, bogoffPriceListExtent);
-
-          double discount = 0.00;
-
-          for (double price : freebies) {
-               discount += price;
-          }
-          return discount;
      }
 
      public double getTotal(){ //applies 2% loyalty discount
