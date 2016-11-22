@@ -18,4 +18,8 @@ public class ShoppingBasket{
      public ArrayList<Purchase> getPurchases(){
           return this.purchases;
      }
+
+     public double getSubTotal(){
+          
+     }
 }

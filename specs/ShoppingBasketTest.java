@@ -39,6 +39,25 @@ public  class ShoppingBasketTest{
           assertEquals(0, purchases.size()); 
      }
 
+     @Test
+     public void candAddPurchaseToPurchasesList(){
+          ArrayList<Purchase> purchases = shoppingbasket.getPurchases();
+          purchases.add(purchase1);
+          assertEquals(1, purchases.size());
+          purchases.add(purchase1);
+          assertEquals(2, purchases.size());
+    }
+
+    @Test
+    public void canGetPurchasesSubtotal(){
+          ArrayList<Purchase> purchases = shoppingbasket.getPurchases();
+          purchases.add(purchase1);
+          purchases.add(purchase2);
+          purchases.add(purchase3);
+          double subTotal = getSubtotal();
+          assertEquals(149.97, subTotal, 0);
+    }
+
 
 
 }
