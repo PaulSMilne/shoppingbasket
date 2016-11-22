@@ -28,7 +28,7 @@ public class ShoppingBasket{
           return subTotal;
      }
 
-     public double applyLoyaltyDiscount(){ //applies 2% loyalty discount
+     public double getTotal(){ //applies 2% loyalty discount
           double subTotal = getSubTotal();
           boolean state = customer.getLoyaltyState();
           if (state == true) {
