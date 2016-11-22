@@ -14,4 +14,8 @@ public class ShoppingBasket{
      public Customer getCustomer(){
           return this.customer;
      }
+
+     public ArrayList<Purchase> getPurchases(){
+          return this.purchases;
+     }
 }

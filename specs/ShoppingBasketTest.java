@@ -1,3 +1,4 @@
+import java.util.*;
 import static org.junit.Assert.*;
 import org.junit.*;
 import shoppingbasket.*;
@@ -23,6 +24,19 @@ public  class ShoppingBasketTest{
           Customer customer = shoppingbasket.getCustomer();
           String name = customer.getName();
           assertEquals("Zippy", name);
+     }
+
+     @Test
+     public void canGetCustomerLoyaltyState(){
+          Customer thisCustomer = shoppingbasket.getCustomer();
+          boolean state = thisCustomer.getLoyaltyState();
+          assertEquals(false, state);
+     }
+
+     @Test
+     public void canGetPurchasesList(){
+          ArrayList<Purchase> purchases = shoppingbasket.getPurchases();
+          assertEquals(0, purchases.size()); 
      }
 
 
