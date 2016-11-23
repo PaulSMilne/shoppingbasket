@@ -26,17 +26,20 @@ public class ShoppingBasket{
 
      public void removePurchase(Purchase purchase){
           ArrayList<Purchase> purchases = getPurchases();
-          ArrayList<Purchase> removal = new ArrayList<Purchase>(); //to hold item/s to remove from purchases
+          ArrayList<Purchase> removal = new ArrayList<Purchase>(); // to hold item/s to remove from purchases
+
           removal.add(purchase);
           purchases.removeAll(removal); 
      }
 
      public double getSubTotal(){
           double subTotal = 0.00;
+
           for (Purchase purchase : purchases){
                double price = purchase.getPrice();
                subTotal += price;
           }
+
           return subTotal;
      }
 
@@ -49,22 +52,23 @@ public class ShoppingBasket{
                boolean state = item.getBogofState();
                if (state == true) {
                     double price = item.getPrice();
-                    bogofPrices.add(price);
+                    bogofPrices.add(price); // gets list of prices of bogof items
                }
           }
+
           if (bogofPrices.size() >= 2) {
                int bogofPriceListSize = bogofPrices.size();
-               int bogofPriceListExtent = bogofPriceListSize / 2;
-               Collections.sort(bogofPrices);
-               List<Double> freebies = bogofPrices.subList(0, bogofPriceListExtent);
+               int bogofPriceListExtent = bogofPriceListSize / 2; // determines how many of the cheaper items to add together
+               Collections.sort(bogofPrices); // sorts ascending from cheapest item
+               List<Double> freebies = bogofPrices.subList(0, bogofPriceListExtent); // makes new list of cheapest half of list
 
                double discount = 0.00;
                for (double price : freebies) {
                     discount += price;
                }
-               return discount;
+               return discount; // returns total of prices in the cheapest half of the list
           } else {
-               return 0.00; //if there is only item there is no discount
+               return 0.00; // if there is only item discount is 0
           }
      }
      public double discountByPercentage(double subTotal, double percentage){
@@ -81,11 +85,11 @@ public class ShoppingBasket{
           double bogofDiscount = bogofDiscount();
           subTotal -= bogofDiscount;
           if (subTotal > 20.00) {
-               subTotal = discountByPercentage(subTotal, 10.00);
+               subTotal = discountByPercentage(subTotal, 10);
           }
           boolean state = customer.getLoyaltyState();
           if (state == true) {
-               double total = discountByPercentage(subTotal, 2.00);
+               double total = discountByPercentage(subTotal, 2);
                return total;
           } else {
                double total = subTotal;
