@@ -165,4 +165,10 @@ public  class ShoppingBasketTest{
     double total = shoppingbasket.getTotal();
     assertEquals(7.98, total, 0);
   }
+
+  @Test
+  public void canDiscountByPercentage(){
+    double discounted = shoppingbasket.discountByPercentage(57.99, 2.00);
+    assertEquals(56.83, discounted, 0);
+  }
 }

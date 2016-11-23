@@ -25,14 +25,9 @@ public class ShoppingBasket{
      }
 
      public void removePurchase(Purchase purchase){
-
-          //create a new list with the item to remove
-          ArrayList<Purchase> removal = new ArrayList<Purchase>();
-          removal.add(purchase);
-
           ArrayList<Purchase> purchases = getPurchases();
-
-          //take the common items in the two lists out of the purchases list
+          ArrayList<Purchase> removal = new ArrayList<Purchase>(); //to hold item/s to remove from purchases
+          removal.add(purchase);
           purchases.removeAll(removal); 
      }
 
@@ -46,9 +41,8 @@ public class ShoppingBasket{
      }
 
      public double bogofDiscount(){
-          ArrayList<Purchase> purchases = getPurchases();
 
-         //create an empty List for the prices of the bogof items
+          ArrayList<Purchase> purchases = getPurchases();
           ArrayList<Double> bogofPrices = new ArrayList<Double>();
 
           for (Purchase item : purchases){
@@ -58,22 +52,13 @@ public class ShoppingBasket{
                     bogofPrices.add(price);
                }
           }
-
-          //checks if there is more than one item in the list
           if (bogofPrices.size() >= 2) {
-               
-               //gets size of price list and half that to get the number of items to discount
                int bogofPriceListSize = bogofPrices.size();
                int bogofPriceListExtent = bogofPriceListSize / 2;
-
-               //the price list is sorted with lowest price first
                Collections.sort(bogofPrices);
-
-               //Creates a sublist of lowest half of prices to add together for the total discount. Will work for both odd and even numbers of prices.
                List<Double> freebies = bogofPrices.subList(0, bogofPriceListExtent);
 
                double discount = 0.00;
-
                for (double price : freebies) {
                     discount += price;
                }
@@ -82,32 +67,29 @@ public class ShoppingBasket{
                return 0.00; //if there is only item there is no discount
           }
      }
+     public double discountByPercentage(double subTotal, double percentage){
+          double multiplier = percentage/100;
+          double discounted = subTotal -= subTotal*multiplier;
+          discounted = discounted*100;
+          discounted = Math.round(discounted);
+          discounted = discounted/100;
+          return discounted;
+     }
 
      public double getTotal(){ //applies 2% loyalty discount
           double subTotal = getSubTotal();
-
           double bogofDiscount = bogofDiscount();
           subTotal -= bogofDiscount;
-
           if (subTotal > 20.00) {
-               double tenPerCentDiscount = subTotal*0.10;
-               subTotal -= tenPerCentDiscount;
-               subTotal = subTotal*100; // code for rounding
-               subTotal = Math.round(subTotal);
-               subTotal = subTotal/100;
+               subTotal = discountByPercentage(subTotal, 10.00);
           }
-
           boolean state = customer.getLoyaltyState();
           if (state == true) {
-               double total = subTotal -= (subTotal * 0.02);
-               total = total*100; // code for rounding
-               total = Math.round(total);
-               total = total/100;
+               double total = discountByPercentage(subTotal, 2.00);
                return total;
           } else {
                double total = subTotal;
                return total;
           }
      }
-
-}
+ }
