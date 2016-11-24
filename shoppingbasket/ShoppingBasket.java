@@ -44,33 +44,35 @@ public class ShoppingBasket{
      }
 
      public double bogofDiscount(){
-
           ArrayList<Purchase> purchases = getPurchases();
-          ArrayList<Double> bogofPrices = new ArrayList<Double>();
+
+          List<Purchase> bogofItems = new ArrayList<Purchase>();
 
           for (Purchase item : purchases){
                boolean state = item.getBogofState();
                if (state == true) {
-                    double price = item.getPrice();
-                    bogofPrices.add(price); // gets list of prices of bogof items
+                    bogofItems.add(item); // gets list of bogof items
                }
           }
-
-          if (bogofPrices.size() >= 2) {
-               int bogofPriceListSize = bogofPrices.size();
-               int bogofPriceListExtent = bogofPriceListSize / 2; // determines how many of the cheaper items to add together
-               Collections.sort(bogofPrices); // sorts ascending from cheapest item
-               List<Double> freebies = bogofPrices.subList(0, bogofPriceListExtent); // makes new list of cheapest half of list
-
-               double discount = 0.00;
-               for (double price : freebies) {
-                    discount += price;
+          Double totalDiscount = 0.00;
+          Map<Purchase, Integer> bogofFrequency = new HashMap<Purchase,Integer>();
+          for (Purchase item : bogofItems){
+               int frequency = Collections.frequency(bogofItems, item);
+               if (frequency > 1){
+               Integer count = bogofFrequency.get(item);
+               bogofFrequency.put(item, (frequency==null) ? 1 : frequency + 1);
                }
-               return discount; // returns total of prices in the cheapest half of the list
-          } else {
-               return 0.00; // if there is only item discount is 0
           }
+          //      if (frequency > 1){
+          //           int multiplier = frequency/2;
+          //           double price = item.getPrice();
+          //           double itemDiscount = price*multiplier;
+          //           totalDiscount += itemDiscount;
+               }
+          }
+          return totalDiscount;
      }
+
      public double discountByPercentage(double subTotal, double percentage){
           double multiplier = percentage/100;
           double discounted = subTotal -= subTotal*multiplier;
