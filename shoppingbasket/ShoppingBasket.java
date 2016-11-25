@@ -5,10 +5,12 @@ public class ShoppingBasket{
 
      Customer customer;
      ArrayList<Purchase> purchases;
+     Bogof bogof;
 
      public ShoppingBasket(Customer customer){
           this.customer = customer;
           this.purchases = new ArrayList<Purchase>();
+          this.bogof = new Bogof();
      }
 
      public ArrayList<Purchase> getPurchases(){
@@ -20,7 +22,13 @@ public class ShoppingBasket{
      }
 
      public double addPurchase(purchase){
-          //do some code
+          boolean bogof = purchase.getBogofState;
+          if (bogof == true){
+               bogoff.addPurchase();
+          } else {
+               purchases.add(purchase);
+          }
+          //other discounts
           return total;
       }
 
