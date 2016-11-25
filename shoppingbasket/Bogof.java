@@ -3,13 +3,17 @@ import java.util.*;
 
 public class Bogof{
 
-     ArrayList<Purchase> purchases;
+     HashMap<Purchase, int> purchases;
 
-     public Bogof(ArrayList<Purchase> purchases){
-          this.purchases = new ArrayList<Purchase>();
+     public Bogof(){
+          this.purchases = new HashMap<Purchase, int>();
      }
 
-     public double bogofSubTotal(purchases){
-
+     public double addPurchase(Purchase purchase, int quantity){
+          //check if purchase already exists.
+          //if no add with quantity as value
+          //if yes interate value with quantity
      }
+
+     public double removePurchase
 }
