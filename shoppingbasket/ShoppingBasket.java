@@ -17,37 +17,30 @@ public class ShoppingBasket{
           return this.customer;
      }
 
-     public boolean getCustomerLoyalty(){
-          Customer customer = getCustomer();
-          boolean loyalty = customer.getLoyaltyState();
-          return loyalty; 
-     }
-
      public ArrayList<Purchase> getPurchases(){
           return this.purchases;
      }
 
-     public void addPurchase(Purchase purchase){
+     public double addPurchase(Purchase purchase){
           ArrayList<Purchase> purchases = getPurchases();
           purchases.add(purchase);
+          total = getTotal();
      }
 
-     public void removePurchase(Purchase purchase){
+     public double removePurchase(Purchase purchase){
           ArrayList<Purchase> purchases = getPurchases();
-          ArrayList<Purchase> removal = new ArrayList<Purchase>(); // to hold item/s to remove from purchases
-
-          removal.add(purchase);
+          ArrayList<Purchase> removal = new ArrayList<Purchase>(); 
+          removal.add(purchase); 
           purchases.removeAll(removal); 
+          total = getTotal();
      }
 
      public double getSubTotal(){
           double subTotal = 0.00;
-
           for (Purchase purchase : purchases){
                double price = purchase.getPrice();
                subTotal += price;
           }
-
           return subTotal;
      }
 
