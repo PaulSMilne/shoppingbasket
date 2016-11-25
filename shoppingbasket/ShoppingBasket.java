@@ -22,24 +22,22 @@ public class ShoppingBasket{
      }
 
      public double addPurchase(Purchase purchase, int quantity){
-          boolean bogof = purchase.getBogofState();
-          if (bogof == true){
-               //check if purchase already exists.
-               //if no add with quantity as value
-               //if yes interate value with quantity
+          boolean bogofState = purchase.getBogofState();
+          if (bogofState == true){
+               bogof.addPurchase(purchase, quantity)
           } else {
-               //add to hashmap - if item exists already, iterate int
+               //put to this.purchases
           }
           //calculate basket total
           return total;
       }
 
-     public double removePurchase(Purchase purchase){
-          boolean bogof = purchase.getBogofState();
-          if (bogof == true) {
-               bogoff.removePurchase(purchase);
+     public double removePurchase(Purchase purchase, int quantity){
+          boolean bogofState = purchase.getBogofState();
+          if (bogofState == true) {
+               bogof.removePurchase(purchase, quantity)
           } else {
-               //decrease int counter in map, if 0 remove from map
+               //replace item in Hashmap with new params, if quantity == 0 remove from map
           }
           //calculate basket total
           return total;
