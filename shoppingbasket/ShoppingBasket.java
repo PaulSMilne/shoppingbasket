@@ -28,6 +28,4 @@ public class ShoppingBasket{
           //do some code
           return total;
      }
-
-
 }
