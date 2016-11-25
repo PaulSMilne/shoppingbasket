@@ -31,6 +31,7 @@ public class Bogof{
                int mulitiplier = quantity / 2;
                double price = purchase.getPrice();
                double returnPrice = price*multiplier;
+               //work out modulus
                bogofTotal += returnPrice;
           }
           return bogofTotal;
