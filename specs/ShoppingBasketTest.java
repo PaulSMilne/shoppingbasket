@@ -93,21 +93,21 @@ public  class ShoppingBasketTest{
     //   assertEquals(124.33, total, 0.00);
     // }
 
-    @Test
-    public void canGetBogofDiscount(){
-      ArrayList<Purchase> purchases = shoppingbasket.getPurchases();
-      purchase1.flipBogofState();
-      purchase2.flipBogofState();
-      purchase3.flipBogofState();
-      shoppingbasket.addPurchase(purchase1);
-      shoppingbasket.addPurchase(purchase1);
-      //shoppingbasket.addPurchase(purchase1);
-      // shoppingbasket.addPurchase(purchase2);
-      // shoppingbasket.addPurchase(purchase2);
-      // shoppingbasket.addPurchase(purchase3);
-      double discount = shoppingbasket.bogofDiscount();
-      assertEquals(14.99, discount, 0);
-    }
+    // @Test
+    // public void canGetBogofDiscount(){
+    //   ArrayList<Purchase> purchases = shoppingbasket.getPurchases();
+    //   purchase1.flipBogofState();
+    //   purchase2.flipBogofState();
+    //   purchase3.flipBogofState();
+    //   shoppingbasket.addPurchase(purchase1);
+    //   shoppingbasket.addPurchase(purchase1);
+    //   //shoppingbasket.addPurchase(purchase1);
+    //   // shoppingbasket.addPurchase(purchase2);
+    //   // shoppingbasket.addPurchase(purchase2);
+    //   // shoppingbasket.addPurchase(purchase3);
+    //   double discount = shoppingbasket.bogofDiscount();
+    //   assertEquals(14.99, discount, 0);
+    // }
 
 //     @Test
 //     public void canGetGrandTotalwithAllDiscounts(){

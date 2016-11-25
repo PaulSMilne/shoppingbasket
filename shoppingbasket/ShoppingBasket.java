@@ -5,14 +5,22 @@ public class ShoppingBasket{
 
      Customer customer;
      ArrayList<Purchase> purchases;
+     boolean loyalty;
 
      public ShoppingBasket(Customer customer){
           this.customer = customer;
+          this.loyalty = customer.getLoyaltyState();
           this.purchases = new ArrayList<Purchase>();
      }
 
      public Customer getCustomer(){
           return this.customer;
+     }
+
+     public boolean getCustomerLoyalty(){
+          Customer customer = getCustomer();
+          boolean loyalty = customer.getLoyaltyState();
+          return loyalty; 
      }
 
      public ArrayList<Purchase> getPurchases(){
@@ -43,55 +51,48 @@ public class ShoppingBasket{
           return subTotal;
      }
 
-     public double bogofDiscount(){
-          ArrayList<Purchase> purchases = getPurchases();
+     // public double bogofDiscount(){
+     //      ArrayList<Purchase> purchases = getPurchases();
 
-          List<Purchase> bogofItems = new ArrayList<Purchase>();
+     //      List<Purchase> bogofItems = new ArrayList<Purchase>();
 
-          for (Purchase item : purchases){
-               boolean state = item.getBogofState();
-               if (state == true) {
-                    bogofItems.add(item); // gets list of bogof items
-               }
-          }
-          Double totalDiscount = 0.00;
-          Map<Purchase, Integer> bogofFrequency = new HashMap<Purchase,Integer>();
-          for (Purchase item : bogofItems){
-               int frequency = Collections.frequency(bogofItems, item);
-               if (frequency > 1){
-               Integer count = bogofFrequency.get(item);
-               bogofFrequency.put(item, (frequency==null) ? 1 : frequency + 1);
-               }
-          }
-          //      if (frequency > 1){
-          //           int multiplier = frequency/2;
-          //           double price = item.getPrice();
-          //           double itemDiscount = price*multiplier;
-          //           totalDiscount += itemDiscount;
-               }
-          }
-          return totalDiscount;
-     }
+     //      for (Purchase item : purchases){
+     //           boolean state = item.getBogofState();
+     //           if (state == true) {
+     //                bogofItems.add(item); // gets list of bogof items
+     //           }
+     //      }
+     //      Double totalDiscount = 0.00;
+     //      Map<Purchase, Integer> bogofFrequency = new HashMap<Purchase,Integer>();
+     //      for (Purchase item : bogofItems){
+     //           int frequency = Collections.frequency(bogofItems, item);
+     //           if (frequency > 1){
+     //           Integer count = bogofFrequency.get(item);
+     //           bogofFrequency.put(item, (frequency==null) ? 1 : frequency + 1);
+     //           }
+     //      }
+     //      //      if (frequency > 1){
+     //      //           int multiplier = frequency/2;
+     //      //           double price = item.getPrice();
+     //      //           double itemDiscount = price*multiplier;
+     //      //           totalDiscount += itemDiscount;
+     //           }
+     //      }
+     //      return totalDiscount;
+     // }
 
-     public double discountByPercentage(double subTotal, double percentage){
-          double multiplier = percentage/100;
-          double discounted = subTotal -= subTotal*multiplier;
-          discounted = discounted*100;
-          discounted = Math.round(discounted);
-          discounted = discounted/100;
-          return discounted;
-     }
-
-     public double getTotal(){ //applies 2% loyalty discount
+     public double getTotal(){ 
           double subTotal = getSubTotal();
-          double bogofDiscount = bogofDiscount();
-          subTotal -= bogofDiscount;
+
+          // double bogofDiscount = bogofDiscount();
+          // subTotal -= bogofDiscount;
+
           if (subTotal > 20.00) {
-               subTotal = discountByPercentage(subTotal, 10);
+               subTotal = Discount.overTwenty(subTotal);
           }
-          boolean state = customer.getLoyaltyState();
-          if (state == true) {
-               double total = discountByPercentage(subTotal, 2);
+
+          if (loyalty == true) {
+               double total = Discount.loyaltyCard(subTotal);
                return total;
           } else {
                double total = subTotal;
